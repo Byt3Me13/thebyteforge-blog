@@ -1,0 +1,58 @@
+---
+---
+
+@import "minima";
+
+/* Custom overrides */
+.wrapper {
+  max-width: 1100px;
+}
+
+.post-content {
+  font-size: 1.05rem;   /* slightly bigger text */
+  line-height: 1.75;    /* more space between lines */
+  color: 696666;       /* softer text color on dark bg */
+}
+
+.post-content img {
+  display: block;
+  margin: 1.5em auto;
+  max-width: 90%;
+  border-radius: 8px;  /* rounded corners look slick */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.site-header .site-title, 
+.site-header .site-title a {
+  color: #ff5f5f !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.site-nav a {
+  color: #ff9f80 !important;
+}
+
+
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #f5f5f5;
+}
+
+/* Inline code */
+code {
+  background-color: #2b2b2b;   /* dark gray background */
+  color: #ffb86c;              /* warm amber/orange text */
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* Code blocks */
+pre code {
+  background-color: #1e1e1e;   /* even darker background */
+  color: #f8f8f2;              /* light text */
+  display: block;
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+}
