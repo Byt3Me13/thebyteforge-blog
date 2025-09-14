@@ -21,15 +21,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Sets up the GitHub Pages runtime (no manual Ruby setup needed)
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # Official Jekyll builder for GitHub Pages (uses the supported github-pages gem stack)
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: .          # your repo root
+          source: .
           destination: ./_site
 
       - name: Upload artifact
@@ -43,5 +41,4 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/dep
+      - name: Deploy to GitHub Page
