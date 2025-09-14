@@ -2,7 +2,7 @@ name: Build and deploy Jekyll site to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -20,23 +20,23 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-          bundler-cache: true
-      - name: Install gems
-        run: |
-          bundle lock --add-platform x86_64-linux
-          bundle install --jobs 4 --retry 3
+
+      # Sets up the GitHub Pages runtime (no manual Ruby setup needed)
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # Official Jekyll builder for GitHub Pages (uses the supported github-pages gem stack)
       - name: Build with Jekyll
-        env:
-          JEKYLL_ENV: production
-        run: bundle exec jekyll build --verbose
-      - name: Upload Pages artifact
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: .          # your repo root
+          destination: ./_site
+
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+
   deploy:
     environment:
       name: github-pages
@@ -44,4 +44,4 @@ jobs:
     needs: build
     steps:
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+        uses: actions/dep
