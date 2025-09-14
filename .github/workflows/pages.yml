@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -20,20 +20,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
           bundler-cache: true
-      - name: Install dependencies
+
+      - name: Install gems
         run: |
           bundle lock --add-platform x86_64-linux
-          bundle install
+          bundle install --jobs 4 --retry 3
+
       - name: Build with Jekyll
-        run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
-      - name: Upload artifact
+        run: bundle exec jekyll build --verbose
+
+      - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
@@ -45,5 +49,5 @@ jobs:
     needs: build
     steps:
       - name: Deploy to GitHub Pages
-        id: pages
+        id: deploy
         uses: actions/deploy-pages@v4
